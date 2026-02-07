@@ -14,7 +14,6 @@ with open("random_forest_model.pkl", "rb") as f:
 class MarketInput(BaseModel):
     avg_price: float
     total_volume: float
-    total_usd: float
     trade_count: int
     total_fee: float
     avg_position: float
@@ -22,6 +21,7 @@ class MarketInput(BaseModel):
     side_mean: float
     direction_mean: float
     crossed_mean: float
+    leverage_segment: int
     value: float   # Fear & Greed index value
 
 
@@ -35,7 +35,6 @@ def predict(data: MarketInput):
     features = np.array([[
         data.avg_price,
         data.total_volume,
-        data.total_usd,
         data.trade_count,
         data.total_fee,
         data.avg_position,
@@ -43,11 +42,22 @@ def predict(data: MarketInput):
         data.side_mean,
         data.direction_mean,
         data.crossed_mean,
+        data.leverage_segment,
         data.value
     ]])
 
     prediction = model.predict(features)[0]
 
+    CLASS_MAPPING = {
+    0: "Extreme Fear",
+    1: "Fear",
+    2: "Neutral",
+    3: "Greed",
+    4: "Extreme Greed"
+}
+
     return {
-        "predicted_class": int(prediction)
+        "predicted_class_id": int(prediction),
+        "predicted_label": CLASS_MAPPING[int(prediction)]
     }
+
