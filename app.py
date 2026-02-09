@@ -253,18 +253,19 @@ def health_check():
 @app.post("/predict")
 def predict(data: MarketInput):
     features = np.array([[
-        data.avg_price,
-        data.total_volume,
-        data.trade_count,
-        data.total_fee,
-        data.avg_position,
-        data.avg_pnl,
-        data.side_mean,
-        data.direction_mean,
-        data.crossed_mean,
-        data.leverage_segment,
-        data.value
-    ]])
+    data.avg_price,
+    data.total_volume,
+    data.trade_count,
+    data.total_fee,
+    data.avg_position,
+    data.avg_pnl,
+    data.side_mean,
+    data.direction_mean,
+    data.crossed_mean,
+    data.value,             
+    data.leverage_segment   
+]])
+
 
     prediction = model.predict(features)[0]
 
