@@ -1,12 +1,20 @@
 FROM python:3.10-slim
 
+# Set working directory
 WORKDIR /app
 
+# Copy dependencies
 COPY requirements.txt .
+
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+# Copy application files
+COPY app.py .
+COPY logistic_reg_.pkl .
 
-EXPOSE 8080
+# Expose port
+EXPOSE 8000
 
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]
+# Start FastAPI app
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
