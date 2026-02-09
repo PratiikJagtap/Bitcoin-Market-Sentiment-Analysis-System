@@ -7,7 +7,7 @@ import numpy as np
 app = FastAPI(title="Bitcoin Market Analysis API")
 
 # Load trained model
-with open("random_forest_model.pkl", "rb") as f:
+with open("logistic_reg_.pkl", "rb") as f:
     model = pickle.load(f)
 
 
