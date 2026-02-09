@@ -1,4 +1,5 @@
 # Bitcoin Market Behavior Modeling
+###📘 Detailed documentation: https://therapeutic-education-e65.notion.site/Bitcoin-Market-Behavior-Modeling-2fecad2d19fe80399538d88415bac371
 
 ## Project Overview
 
